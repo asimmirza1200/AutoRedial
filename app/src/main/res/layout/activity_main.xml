@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    tools:context="shatova.my_redial.MainActivity">
+    <ImageView
+        android:id="@+id/image"
+        android:layout_centerHorizontal="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher_round"/>
+
+    <TextView
+        android:id="@+id/txt_phone"
+        android:layout_below="@+id/image"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_centerHorizontal="true"
+        android:text="Phone Number to dial"
+        />
+    <LinearLayout
+
+        android:id="@+id/phone_layout"
+        android:layout_below="@id/txt_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/phone_number"
+            android:inputType="phone"
+            android:layout_marginTop="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Phone number to dial"
+            />
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/pick_contact"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/contact"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_delay"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_centerHorizontal="true"
+        android:text="Delay between calls "
+        android:layout_below="@+id/phone_layout"
+        />
+    <EditText
+        android:id="@+id/atteptsNum"
+        android:inputType="number"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="Delay between calls "
+        android:layout_below="@+id/txt_delay"
+        />
+
+
+    <TextView
+        android:id="@+id/counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@id/atteptsNum"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"/>
+
+        <Button
+            android:layout_below="@id/counter"
+            android:id="@+id/call_button"
+            android:background="@drawable/roundedbackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:textSize="20dp"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+             />
+        <Button
+            android:background="@drawable/roundedbackground"
+            android:layout_below="@id/call_button"
+            android:id="@+id/exit_button"
+            android:textSize="20dp"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="cancel"
+             />
+
+
+</RelativeLayout>

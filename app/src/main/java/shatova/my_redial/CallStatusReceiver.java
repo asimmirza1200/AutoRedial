@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.TelephonyManager;
+import android.widget.Toast;
 
 public abstract class CallStatusReceiver extends BroadcastReceiver {
 
@@ -34,6 +35,7 @@ public abstract class CallStatusReceiver extends BroadcastReceiver {
             }
             else if(stateStr.equals(TelephonyManager.EXTRA_STATE_OFFHOOK)){
                 state = TelephonyManager.CALL_STATE_OFFHOOK;
+
             }
             else if(stateStr.equals(TelephonyManager.EXTRA_STATE_RINGING)){
                 state = TelephonyManager.CALL_STATE_RINGING;
@@ -71,6 +73,7 @@ public abstract class CallStatusReceiver extends BroadcastReceiver {
                 onIncomingCallReceived(context, number, callStartTime);
                 break;
             case TelephonyManager.CALL_STATE_OFFHOOK:
+
                 //Transition of ringing->offhook are pickups of incoming calls.  Nothing done on them
                 if(lastState != TelephonyManager.CALL_STATE_RINGING){
                     isIncoming = false;

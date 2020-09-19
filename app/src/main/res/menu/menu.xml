@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/item2"
+        android:title="Speaker On"
+        app:showAsAction="never"
+        android:checkable="true"
+        />
+
+    <item
+        android:id="@+id/item3"
+        android:title="Delay between calls"
+        app:showAsAction="never">
+
+        <menu>
+
+            <item
+                android:id="@+id/subitem1"
+                android:title="30 seconds" />
+
+            <item
+                android:id="@+id/subitem2"
+                android:title="1 minute" />
+            <item
+                android:id="@+id/subitem3"
+                android:title="2 minute" />
+            <item
+                android:id="@+id/subitem4"
+                android:title="5 minute" />
+
+        </menu>
+
+    </item>
+
+</menu>

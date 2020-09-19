@@ -3,11 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingTop="16dp"
-    android:paddingRight="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="shatova.my_redial.MainActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        app:titleTextColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:elevation="4dp"
+        app:popupTheme="@style/CustomPopupTheme"
+        />
+    <RelativeLayout
+        android:layout_below="@id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        tools:context="shatova.my_redial.MainActivity">
     <ImageView
         android:id="@+id/image"
         android:layout_centerHorizontal="true"
@@ -51,6 +66,7 @@
     </LinearLayout>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/txt_delay"
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
@@ -61,8 +77,10 @@
         android:layout_below="@+id/phone_layout"
         />
     <EditText
+        android:visibility="gone"
         android:id="@+id/atteptsNum"
         android:inputType="number"
+        android:text="30"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,6 +112,7 @@
             android:textColor="@android:color/white"
              />
         <Button
+            android:visibility="gone"
             android:background="@drawable/roundedbackground"
             android:layout_below="@id/call_button"
             android:id="@+id/exit_button"
@@ -105,6 +124,6 @@
             android:layout_height="wrap_content"
             android:text="cancel"
              />
-
+    </RelativeLayout>
 
 </RelativeLayout>

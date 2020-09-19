@@ -3,6 +3,7 @@ package shatova.my_redial;
 import android.Manifest;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.net.wifi.aware.PublishConfig;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
@@ -24,12 +25,18 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.ButtonBarLayout;
+import android.support.v7.widget.Toolbar;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.util.Log;
 import android.content.Context;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -48,7 +55,7 @@ import android.os.Handler;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     public final static int MY_PERMISSIONS_REQUEST = 11;
     public static boolean stop=false;
@@ -81,8 +88,7 @@ public class MainActivity extends Activity {
     boolean requestAsked;
     String[] PERMISSIONS = new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE,
              Manifest.permission.READ_CALL_LOG};
-
-
+    public static boolean speakeron=true;
 
 
     @Override
@@ -90,7 +96,8 @@ public class MainActivity extends Activity {
         //Log.d(TAG, "on create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+         Toolbar toolbar=findViewById(R.id.my_toolbar);
+         setSupportActionBar(toolbar);
         /*if (savedInstanceState != null){
             attempts = savedInstanceState.getInt("attempts");
             call();
@@ -184,6 +191,51 @@ public class MainActivity extends Activity {
         getApplicationContext().getPackageManager().setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_ENABLED , PackageManager.DONT_KILL_APP);
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu, menu);
+
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.item2:
+                if (item.isChecked()) {
+                    item.setChecked(false);
+                    speakeron=true;
+                } else {
+                    speakeron=false;
+
+                    item.setChecked(true);
+//                    audioManager.setSpeakerphoneOn(false);
+                }
+                return true;
+            case R.id.subitem1:
+                attemptsEditText.setText("30");
+                return true;
+            case R.id.subitem2:
+                attemptsEditText.setText("60");
+
+                return true;
+            case R.id.subitem3:
+                attemptsEditText.setText("120");
+
+                return true;
+            case R.id.subitem4:
+                attemptsEditText.setText("300");
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     private void requestPermission() {
 //

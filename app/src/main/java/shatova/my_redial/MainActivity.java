@@ -112,10 +112,10 @@ public class MainActivity extends AppCompatActivity {
         phoneNumber = findViewById(R.id.phone_number);
         counter = findViewById(R.id.counter);
 
-        String lastNumber = CallLog.Calls.getLastOutgoingCall(this);
-        if (!lastNumber.isEmpty()){
-            phoneNumber.setText(lastNumber);
-        }
+//        String lastNumber = CallLog.Calls.getLastOutgoingCall(this);
+//        if (!lastNumber.isEmpty()){
+//            phoneNumber.setText(lastNumber);
+//        }
 
 
 
@@ -144,11 +144,9 @@ public class MainActivity extends AppCompatActivity {
                    {
                        attempts = Integer.parseInt(attemptsEditText.getText().toString());
                        number = phoneNumber.getText().toString();
-                      Intent intent = new Intent(getApplicationContext(), CallService.class);
-                      intent.putExtra("number", phoneNumber.getText().toString());
-                      intent.putExtra("attempts", attempts);
+                       requestPermission2();
 
-                      startService(intent);
+
                   }
 
 
@@ -242,7 +240,19 @@ public class MainActivity extends AppCompatActivity {
         TedPermission.with(getApplicationContext())
                 .setPermissionListener(permissionlistener)
 //                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
-                .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS)
+                .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE,
+                        Manifest.permission.READ_CALL_LOG)
+                .check();
+
+
+    }
+    private void requestPermission2() {
+//
+        TedPermission.with(getApplicationContext())
+                .setPermissionListener(permissionlistener2)
+//                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                .setPermissions(Manifest.permission.MODIFY_AUDIO_SETTINGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE,
+                        Manifest.permission.READ_CALL_LOG)
                 .check();
 
 
@@ -266,6 +276,29 @@ public class MainActivity extends AppCompatActivity {
 
 
     };
+
+    PermissionListener permissionlistener2 = new PermissionListener() {
+
+
+        @Override
+        public void onPermissionGranted() {
+
+            Intent intent = new Intent(getApplicationContext(), CallService.class);
+            intent.putExtra("number", phoneNumber.getText().toString());
+            intent.putExtra("attempts", attempts);
+
+            startService(intent);
+        }
+
+        @Override
+        public void onPermissionDenied(List<String> deniedPermissions) {
+
+
+        }
+
+
+    };
+
     @Override public void onActivityResult(int reqCode, int resultCode, Intent data){ super.onActivityResult(reqCode, resultCode, data);
 
         if (reqCode == PICK_CONTACT) {

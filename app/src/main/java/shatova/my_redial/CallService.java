@@ -30,6 +30,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class CallService extends Service {
 
     String TAG = "myLOG";
@@ -150,7 +152,7 @@ public class CallService extends Service {
             public void run() {
                 Log.d(TAG, "ЗВОНЮ в " + tryCall + " раз из " + attempts);
                 try {
-                    getApplicationContext().startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number)));
+                    getApplicationContext().startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number)).setFlags(FLAG_ACTIVITY_NEW_TASK));
 //                    Toast.makeText(getApplicationContext(), "Making call " + tryCall + " of " + attempts, Toast.LENGTH_SHORT).show();
                     tryCall++;
                 } catch (SecurityException sEx) {
@@ -237,11 +239,11 @@ public class CallService extends Service {
         }
         stopSelf();
         }else {
-            Intent intent = new Intent(getApplicationContext(), CallService.class);
-            intent.putExtra("number", number);
-            intent.putExtra("attempts", attempts);
-
-            startService(intent);
+//            Intent intent = new Intent(getApplicationContext(), CallService.class);
+//            intent.putExtra("number", number);
+//            intent.putExtra("attempts", attempts);
+//
+//            startService(intent);
             }
 
 

@@ -33,12 +33,12 @@ public class CallReceiver extends CallStatusReceiver {
         if(MainActivity.speakeron){
             final AudioManager audioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
 
-            audioManager.setMode(AudioManager.MODE_IN_CALL);
+            audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION );
             audioManager.setSpeakerphoneOn(true);
         }else {
             final AudioManager audioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
 
-            audioManager.setMode(AudioManager.MODE_IN_CALL);
+            audioManager.setMode(AudioManager.MODE_NORMAL);
             audioManager.setSpeakerphoneOn(false);
         }
 

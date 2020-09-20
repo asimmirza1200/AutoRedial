@@ -113,7 +113,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="backgroundColor" value="fafafa" />
+                                      <entry key="outputName" value="ic_launcher2" />
                                     </map>
                                   </option>
                                 </PersistentState>

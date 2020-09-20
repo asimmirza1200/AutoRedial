@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean called;
 
     boolean requestAsked;
-    String[] PERMISSIONS = new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE,
+    String[] PERMISSIONS = new String[]{Manifest.permission.MODIFY_PHONE_STATE,Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE,
              Manifest.permission.READ_CALL_LOG};
     public static boolean speakeron=true;
 
@@ -130,10 +130,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
-        if (!hasPermission(getApplicationContext(),Manifest.permission.ANSWER_PHONE_CALLS)) {
-            Log.d(TAG, "Request Permissions");
+        if (!hasPermission(getApplicationContext(),ANSWER_PHONE_CALLS)) {
+            Log.d(TAG, "Request Permissions2");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ANSWER_PHONE_CALLS}, MY_PERMISSIONS_REQUEST);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ANSWER_PHONE_CALLS}, 12);
             }
 
 

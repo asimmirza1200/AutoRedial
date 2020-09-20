@@ -78,10 +78,10 @@ public class CallReceiver extends CallStatusReceiver {
     @Override
     protected void onOutgoingCallStarted(final Context ctx, String number, Date start)
     {
+        
           runnable=new Runnable() {
             @Override
             public void run() {
-
            endCall(ctx);
             }
         };

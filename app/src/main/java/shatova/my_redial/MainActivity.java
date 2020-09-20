@@ -217,19 +217,28 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
             case R.id.subitem1:
-                attemptsEditText.setText("30");
+                attemptsEditText.setText("5");
                 return true;
             case R.id.subitem2:
-                attemptsEditText.setText("60");
+                attemptsEditText.setText("10");
 
                 return true;
             case R.id.subitem3:
-                attemptsEditText.setText("120");
+                attemptsEditText.setText("15");
 
                 return true;
             case R.id.subitem4:
-                attemptsEditText.setText("300");
+                attemptsEditText.setText("30");
+            case R.id.subitem5:
+                attemptsEditText.setText("60");
 
+                return true;
+            case R.id.subitem6:
+                attemptsEditText.setText("120");
+
+                return true;
+            case R.id.subitem7:
+                attemptsEditText.setText("300");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

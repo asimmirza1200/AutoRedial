@@ -47,13 +47,15 @@ public class CallReceiver extends CallStatusReceiver {
     public static boolean endCall(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             final TelecomManager telecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-            if (telecomManager != null && ContextCompat.checkSelfPermission(context, Manifest.permission.ANSWER_PHONE_CALLS) == PackageManager.PERMISSION_GRANTED) {
+//            if (telecomManager != null && ContextCompat.checkSelfPermission(context, Manifest.permission.ANSWER_PHONE_CALLS) == PackageManager.PERMISSION_GRANTED) {
                 telecomManager.endCall();
+                Toast.makeText(context, "Call Ended Automatically", Toast.LENGTH_SHORT).show();
                 return true;
-            }
-            return false;
+//            }
+//            Toast.makeText(context, "Call Not Ended", Toast.LENGTH_SHORT).show();
+
+//            return false;
         }
-        //use unofficial API for older Android versions, as written here: https://stackoverflow.com/a/8380418/878126
         try {
             final Class<?> telephonyClass = Class.forName("com.android.internal.telephony.ITelephony");
             final Class<?> telephonyStubClass = telephonyClass.getClasses()[0];
@@ -69,6 +71,8 @@ public class CallReceiver extends CallStatusReceiver {
             final Object telephonyObject = serviceMethod.invoke(null, retbinder);
             final Method telephonyEndCall = telephonyClass.getMethod("endCall");
             telephonyEndCall.invoke(telephonyObject);
+            Toast.makeText(context, "Call Ended Automatically", Toast.LENGTH_SHORT).show();
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();

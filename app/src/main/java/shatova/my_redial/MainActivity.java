@@ -5,9 +5,11 @@ import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.net.wifi.aware.PublishConfig;
+import android.os.Build;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -54,6 +56,8 @@ import android.os.Handler;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+
+import static android.Manifest.permission.ANSWER_PHONE_CALLS;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -123,7 +127,20 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "Request Permissions");
             ActivityCompat.requestPermissions(this, PERMISSIONS, MY_PERMISSIONS_REQUEST);
 
-        }//else{
+
+
+        }
+        if (!hasPermission(getApplicationContext(),Manifest.permission.ANSWER_PHONE_CALLS)) {
+            Log.d(TAG, "Request Permissions");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ANSWER_PHONE_CALLS}, MY_PERMISSIONS_REQUEST);
+            }
+
+
+        }
+
+
+        //else{
             //Log.d(TAG, "PERMISSIONS GRANTED");
         //}
 

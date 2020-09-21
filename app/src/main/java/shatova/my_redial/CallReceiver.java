@@ -1,7 +1,6 @@
 package shatova.my_redial;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,51 +9,61 @@ import android.os.Binder;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.telecom.TelecomManager;
-import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
-import java.util.logging.LogManager;
+
+import static android.content.Context.TELECOM_SERVICE;
 
 public class CallReceiver extends CallStatusReceiver {
-       Handler handler=new Handler();
+    Handler handler = new Handler();
     private Runnable runnable;
 
 
     @Override
-    protected void onIncomingCallReceived(Context ctx, String number, Date start)
-    {
+    protected void onIncomingCallReceived(Context ctx, String number, Date start) {
         //
     }
 
     @Override
-    protected void onIncomingCallAnswered(Context ctx, String number, Date start)
-    {
+    protected void onIncomingCallAnswered(Context ctx, String number, Date start) {
         //
     }
 
     @Override
-    protected void onIncomingCallEnded(Context ctx, String number, Date start, Date end)
-    {
+    protected void onIncomingCallEnded(Context ctx, String number, Date start, Date end) {
         //
     }
-    @SuppressLint("PrivateApi")
-    public static boolean endCall(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            final TelecomManager telecomManager = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
-//            if (telecomManager != null && ContextCompat.checkSelfPermission(context, Manifest.permission.ANSWER_PHONE_CALLS) == PackageManager.PERMISSION_GRANTED) {
-                telecomManager.endCall();
-                Toast.makeText(context, "Call Ended Automatically", Toast.LENGTH_SHORT).show();
-                return true;
+
+    public static void endCall(Context context) {
+        TelecomManager telecomManager = null;
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            telecomManager = (TelecomManager) context.getSystemService(TELECOM_SERVICE);
+
+//            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED || telecomManager == null) {
+//                return;
 //            }
-//            Toast.makeText(context, "Call Not Ended", Toast.LENGTH_SHORT).show();
 
-//            return false;
+
+//            if (telecomManager.isInCall()) {
+                try {
+                    boolean callDisconnected = telecomManager.endCall();
+                    if (callDisconnected) {
+                        Toast.makeText(context, "Call Ended Automatically", Toast.LENGTH_SHORT).show();
+                        return;
+
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+
+
+//            }
         }
         try {
             final Class<?> telephonyClass = Class.forName("com.android.internal.telephony.ITelephony");
@@ -73,11 +82,9 @@ public class CallReceiver extends CallStatusReceiver {
             telephonyEndCall.invoke(telephonyObject);
             Toast.makeText(context, "Call Ended Automatically", Toast.LENGTH_SHORT).show();
 
-            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
     }
     @Override
     protected void onOutgoingCallStarted(final Context ctx, String number, Date start)
@@ -122,12 +129,3 @@ public class CallReceiver extends CallStatusReceiver {
 
 }
 
-interface ITelephony {
-
-    boolean endCall();
-
-    void answerRingingCall();
-
-    void silenceRinger();
-
-}

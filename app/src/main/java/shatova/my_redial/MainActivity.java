@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean called;
 
     boolean requestAsked;
-    String[] PERMISSIONS = new String[]{Manifest.permission.MODIFY_PHONE_STATE,Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE,
+    String[] PERMISSIONS = new String[]{ANSWER_PHONE_CALLS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE,
              Manifest.permission.READ_CALL_LOG};
     public static boolean speakeron=true;
 
@@ -181,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 stopService(new Intent(MainActivity.this, CallService.class));
 //
 //
+                finish();
 //                //Disable
                 getApplicationContext().getPackageManager().setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_DISABLED , PackageManager.DONT_KILL_APP);
             }

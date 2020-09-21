@@ -29,7 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo2"/>
 
     <TextView
         android:id="@+id/txt_phone"
@@ -115,7 +115,6 @@
             android:textColor="@android:color/white"
              />
         <Button
-            android:visibility="gone"
             android:layout_margin="20dp"
             android:background="@drawable/roundedbackground"
             android:id="@+id/exit_button"

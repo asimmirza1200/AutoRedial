@@ -10,6 +10,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+//    password:123456,
+//    keyalias:autoredial
     buildTypes {
         release {
             minifyEnabled false
